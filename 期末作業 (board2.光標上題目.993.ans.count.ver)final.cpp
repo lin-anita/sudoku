@@ -1,10 +1,10 @@
 #include <iostream>
 #include <windows.h>
-#include <cstdlib> /* ¶Ã¼Æ¬ÛÃö¨ç¼Æ */
-#include <ctime>   /* ®É¶¡¬ÛÃö¨ç¼Æ */
+#include <cstdlib> /* äº‚æ•¸ç›¸é—œå‡½æ•¸ */
+#include <ctime>   /* æ™‚é–“ç›¸é—œå‡½æ•¸ */
 
 using namespace std;
-
+//é¡Œåº«
 int a1[9][9] = {
 {1, 0, 2, 0, 0, 0, 9, 0, 0},  
 {0, 3, 0, 0, 0, 6, 4, 0, 2},  
@@ -41,7 +41,7 @@ int a3[9][9] = {
 {0, 6, 1, 0, 0, 8, 7, 0, 0} 
 
 };
-
+//è§£ç­”
 int a11[9][9]={
 {1, 8, 2, 4, 5, 3, 9, 7, 6},
 {5, 3, 7, 1, 9, 6, 4, 8, 2},
@@ -79,6 +79,7 @@ int a33[9][9] = {
 {1, 5, 7, 3, 4, 6, 8, 9, 2}
 };
 
+//æŒ‰H(HELP)ï¼Œæœ‰ç­”æ¡ˆ
 void show_ans(int board_num)
 {
 	for(int i = 0; i < 9; i++)
@@ -110,40 +111,40 @@ int cur_r = 0, cur_c = 0;
 bool check_horizontal()
 {
     /* TODO: Check if a horizontal line has conflict number, or is finished. */
-    bool nums[10] = {false};  // ¥uÀË¬d¥Ø«e¥ú¼Ğ©Ò¦b¦æ
+    bool nums[10] = {false};  // åªæª¢æŸ¥ç›®å‰å…‰æ¨™æ‰€åœ¨è¡Œ
     for (int j = 0; j < 9; ++j) {
         int num = board2[cur_r][j];
         if (num > 0) {
             if (nums[num]) {
-                return true;  // ¦³½Ä¬ğ
+                return true;  // æœ‰è¡çª
             }
-            nums[num] = true;//°O¿ı¬İ¹Lªº¼Æ¦r 
+            nums[num] = true;//è¨˜éŒ„çœ‹éçš„æ•¸å­— 
         }
     }
-    return false;  // ¨S¦³½Ä¬ğ
+    return false;  // æ²’æœ‰è¡çª
 }
 
 bool check_vertical()
 {
     /* TODO: Check if a vertical line has conflict number, or is finished. */
-    bool nums[10] = {false};  // ¥uÀË¬d¥Ø«e¥ú¼Ğ©Ò¦b¦æ
+    bool nums[10] = {false};  // åªæª¢æŸ¥ç›®å‰å…‰æ¨™æ‰€åœ¨è¡Œ
     for (int j = 0; j < 9; ++j) {
         int num = board2[j][cur_c];
         if (num > 0) {
             if (nums[num]) {
-                return true;  // ¦³½Ä¬ğ
+                return true;  // æœ‰è¡çª
             }
-            nums[num] = true;//°O¿ı¬İ¹Lªº¼Æ¦r 
+            nums[num] = true;//è¨˜éŒ„çœ‹éçš„æ•¸å­— 
         }
     }
-    return false;  // ¨S¦³½Ä¬ğ
+    return false;  // æ²’æœ‰è¡çª
 }
 
 bool check_block()
 {
     /* TODO: Check if a block has conflict number, or is finished. */
     int a,b;
-    //¶}©l¦b¨C¤j®æªº¥ª¤W¤p®æ 
+    //é–‹å§‹åœ¨æ¯å¤§æ ¼çš„å·¦ä¸Šå°æ ¼ 
     a=cur_r/3*3;
 	b=cur_c/3*3;
 	
@@ -157,9 +158,9 @@ bool check_block()
 			{
             	if (nums[num]) 
 				{
-                	return true;  // ¦³½Ä¬ğ
+                	return true;  // æœ‰è¡çª
             	}
-            nums[num] = true;//°O¿ı¬İ¹Lªº¼Æ¦r 
+            nums[num] = true;//è¨˜éŒ„çœ‹éçš„æ•¸å­— 
         	}
 		}
     }
@@ -172,8 +173,8 @@ void fill_number(char c)
              After fill in the number, check the horizontal line, the
              vertical line and the block the cell is in.
      */
-    /*ÀË¬d¬O§_½Ä¬ğ©ñ¦bprint_board¸Ì­±*/
-	// ¥]§t 0 ªº±¡ªp
+    /*æª¢æŸ¥æ˜¯å¦è¡çªæ”¾åœ¨print_boardè£¡é¢*/
+	// åŒ…å« 0 çš„æƒ…æ³
 	if (editable[cur_r][cur_c]){
 		if (c >= '0' && c <= '9') {  
         board2[cur_r][cur_c] = c - '0';
@@ -189,18 +190,18 @@ void move_cursor(char c)
     */
     int original_r = cur_r, original_c = cur_c;
     
-    switch (toupper(c)) {//ÅÜ¤j¼g 
+    switch (toupper(c)) {//è®Šå¤§å¯« 
         case 'W':
-            if (cur_r > 0) cur_r--;//(¨¾¶W¥X¹CÀ¸®Ø)¡F¥ú¼Ğ©¹¤W 
+            if (cur_r > 0) cur_r--;//(é˜²è¶…å‡ºéŠæˆ²æ¡†)ï¼›å…‰æ¨™å¾€ä¸Š 
             break;
         case 'S':
-            if (cur_r < 8) cur_r++;//(¨¾¶W¥X¹CÀ¸®Ø)¡F¥ú¼Ğ©¹¤U 
+            if (cur_r < 8) cur_r++;//(é˜²è¶…å‡ºéŠæˆ²æ¡†)ï¼›å…‰æ¨™å¾€ä¸‹ 
             break;
         case 'A':
-            if (cur_c > 0) cur_c--;//(¨¾¶W¥X¹CÀ¸®Ø)¡F¥ú¼Ğ©¹¥ª 
+            if (cur_c > 0) cur_c--;//(é˜²è¶…å‡ºéŠæˆ²æ¡†)ï¼›å…‰æ¨™å¾€å·¦ 
             break;
         case 'D':
-            if (cur_c < 8) cur_c++;//(¨¾¶W¥X¹CÀ¸®Ø)¡F¥ú¼Ğ©¹¥k 
+            if (cur_c < 8) cur_c++;//(é˜²è¶…å‡ºéŠæˆ²æ¡†)ï¼›å…‰æ¨™å¾€å³ 
             break;
     }
 }
@@ -244,7 +245,7 @@ bool is_done(int i, int j)
     }
 
     
-    //¦C¦³¨S¦³¶ñº¡
+    //åˆ—æœ‰æ²’æœ‰å¡«æ»¿
 	for(int f=0;f<9;f++){
 		if(!board2[f][j])
 		{
@@ -255,7 +256,7 @@ bool is_done(int i, int j)
 		} 
 	} 
 	
-	//¦æ¦³¨S¦³¶ñº¡
+	//è¡Œæœ‰æ²’æœ‰å¡«æ»¿
 	for(int f=0;f<9;f++){
 		if(!board2[i][f])
 		{
@@ -266,9 +267,9 @@ bool is_done(int i, int j)
 		}
 	}
 	
-	//block¦³¨S¦³¶ñº¡
+	//blockæœ‰æ²’æœ‰å¡«æ»¿
 	int x,y;
-    //¶}©l¦b¨C¤j®æªº¥ª¤W¤p®æ 
+    //é–‹å§‹åœ¨æ¯å¤§æ ¼çš„å·¦ä¸Šå°æ ¼ 
     x=(i/3)*3;
 	y=(j/3)*3;
 	
@@ -296,7 +297,7 @@ bool is_done(int i, int j)
 bool check_win()
 {
     /* TODO: Check if the game is set. That is, every cell is finished. */
-    // ÀË¬d©Ò¦³®æ¤l¬O§_³£¶ñº¡
+    // æª¢æŸ¥æ‰€æœ‰æ ¼å­æ˜¯å¦éƒ½å¡«æ»¿
 /**/    for(int i = 0; i < 9; i++) {
         for(int j = 0; j < 9; j++) {
             if(board2[i][j] == 0) {
@@ -305,7 +306,7 @@ bool check_win()
         }
     }
     
-    // ÀË¬d¬O§_¦³¥ô¦ó½Ä¬ğ
+    // æª¢æŸ¥æ˜¯å¦æœ‰ä»»ä½•è¡çª
     for(int i = 0; i < 9; i++) {
         for(int j = 0; j < 9; j++) {
             if(is_invalid(i, j)) {
@@ -314,7 +315,7 @@ bool check_win()
         }
     }
     
-    return true;  // ¥ş³¡¶ñº¡¥B¨S¦³½Ä¬ğ
+    return true;  // å…¨éƒ¨å¡«æ»¿ä¸”æ²’æœ‰è¡çª
 }
 
 bool is_moving_action(char c)
@@ -392,16 +393,16 @@ void print_board(int count)
             // If the content is 0, print a dot, else print the number.
             
             if (count == 1) {
-            // ¨Ï¥Î­ì©lÃD¥Ø (board)
+            // ä½¿ç”¨åŸå§‹é¡Œç›® (board)
             	if (board[i][j] == 0)
-            		cout << get_styled_text(" ¡P ", style);
+            		cout << get_styled_text(" Â· ", style);
             	else
             		cout << get_styled_text(" " + to_string(board[i][j]) + " ", style);
             	}
 			else {
-			// ¨Ï¥Î¹CÀ¸ª¬ºA (board2)
+			// ä½¿ç”¨éŠæˆ²ç‹€æ…‹ (board2)
 			if (board2[i][j] == 0)
-			cout << get_styled_text(" ¡P ", style);
+			cout << get_styled_text(" Â· ", style);
 			else
 			cout << get_styled_text(" " + to_string(board2[i][j]) + " ", style);
             }
@@ -474,13 +475,13 @@ void rest_number()
 }
 int main()
 {
-	 // ¨Ï¥Î·í«e®É¶¡§@¬°¶Ã¼ÆºØ¤l
+	 // ä½¿ç”¨ç•¶å‰æ™‚é–“ä½œç‚ºäº‚æ•¸ç¨®å­
     srand(time(NULL));
     
-    // ²£¥Í 1-3 ªº¶Ã¼Æ¡A¿ï¾Ü´Ñ½L
+    // ç”¢ç”Ÿ 1-3 çš„äº‚æ•¸ï¼Œé¸æ“‡æ£‹ç›¤
     int board_num = rand() % 3 + 1;
     
-    // ³]©w¿ï¾Üªº´Ñ½L
+    // è¨­å®šé¸æ“‡çš„æ£‹ç›¤
     set_board(board_num);
     
     char c;
